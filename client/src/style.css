@@ -1,0 +1,514 @@
+/* this file i create it and put the home page css code and we import it in the App.js file, we can use App.css that react create it by default where it also import it in App.js */
+
+*{
+    font-family: "Oswald", sans-serif;
+  
+  }
+  body{
+      width: 100vw;
+      overflow-x: hidden;
+  
+  }
+    .navbar{
+      width: 100vw;
+      position: fixed;
+      z-index: 2;
+      background-color: #004d40;
+      
+    }
+    .navbar-brand{
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 2rem;
+    }
+    .nav-item a{
+      color: #ffffff;
+  
+      font-size: 1.3rem;
+      opacity: 0.9;
+    }
+    .carousel-caption{
+      background-color: #ffff;
+      border-radius: 3%;
+      opacity: 0.8;
+  
+    }
+  .carousel-item img {
+      object-fit: cover; 
+      width: 20%;
+  }
+  
+  .carousel-caption {
+      position: absolute;
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+  }
+  
+  .carousel-caption h3,
+  .carousel-caption p {
+      font-size: 5rem;
+      color: rgb(0, 0, 0);
+     
+  }
+  .carousel-caption p{
+      font-size: 2rem;
+      opacity: 0.8;
+  }
+  
+  @media screen and (max-width: 890px) {
+    .carousel-caption {
+      bottom: 0%; 
+  }
+    .carousel-caption h3,
+    .carousel-caption p {
+        font-size: 2rem;
+       
+    }
+   
+    .carousel-caption {
+      width: 70%; 
+  }
+  }
+  .custom-navbar {
+    background-color: #004d40;
+    transition: all 0.4s ease-in-out;
+    padding: 20px 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+  
+  
+  /* navbar: */
+  .navbar-scrolled {
+    background-color: #004d40 !important;
+    padding: 10px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideFade 0.5s ease-in-out;
+  }
+  
+  @keyframes slideFade {
+    0% {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @media screen and (max-width: 560px) {
+  
+      .carousel-caption h3, .carousel-caption p {
+        font-size: 1.1rem;
+  
+  }
+  }
+
+  /* Make carousel fullscreen on mobile */
+@media (max-width: 768px) {
+  #homeCarousel {
+    height: 100vh;
+  }
+
+  
+
+  .carousel-caption {
+    bottom: 10%;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .carousel-caption h3 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-caption p {
+    font-size: 1.1rem;
+  }
+}
+
+  /* ///////////////////////features//////////////////////////// */
+  
+  .features{
+    display: flex;
+    margin-top: 80px;
+    justify-content: center;
+    align-items: self-start;
+    
+    }
+    
+    .features .featureImg{
+        width: 45%;
+    }
+    .features .featureImg img{
+    width: 90%;
+    border-top-right-radius: 50px;
+    
+    }
+    
+    .features .featureCont{
+        width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    }
+    
+    .features .featureCont h2{
+    font-size: 1.8rem;
+    color: #004d40;
+    }
+    
+    .features .featureCont p{
+        font-size: 1.6rem;
+        color: #6a8695;
+    }
+    
+    .features .featureCont .cross-respContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 20px;
+        width: 100%;
+    
+    
+    }
+    .features .featureCont .cross-respContainer .cross{
+        
+        text-align: left;
+    }
+    
+    .features .featureCont .cross-respContainer .cross .Aboutbuttons{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 1.3rem;
+    }
+    .features .featureCont .cross-respContainer button{
+    border: none;
+    }
+    .features .featureCont .cross-respContainer .howItWorkText{
+      display: none;
+      margin-top: 15px;
+    color: #004d40;
+  
+    }
+    .features .featureCont .cross-respContainer .responsive{
+        width: 43%;
+        max-width: 45%;
+        text-align: left;
+    
+    }
+    .features .featureCont .cross-respContainer i{
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    }
+    
+    .features .featureCont .cross-respContainer h3{
+        font-size: 2rem;
+        color: #263b5e;
+    }
+    .features .featureCont .cross-respContainer .cross ul{
+      list-style-type: none;
+      display: block;
+      margin-top: 15px;
+    color: #004d40;
+    line-height: 4rem;
+    }
+    .features .featureCont .cross-respContainer .cross ul li{
+      font-size: 1.6rem;
+    }
+    .Aboutbuttons button {
+      background-color: #004d40;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin: 10px;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    
+    .Aboutbuttons button:hover {
+      background-color: #00695c;
+      transform: scale(1.05);
+    }
+    
+    .Aboutbuttons .active-btn {
+      background-color: #c2ba9e;
+      color: black;
+      font-weight: bold;
+      transform: scale(1.05);
+    }
+    
+    .answer {
+      margin-top: 15px;
+      background-color: #f1f1f1;
+      padding: 15px 20px;
+      border-left: 5px solid #004d40;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #333;
+    }
+    
+    .animated {
+      animation: fadeSlide 0.5s ease forwards;
+    }
+    
+    @keyframes fadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+  @media screen and (max-width: 992px) {
+    .features{
+      flex-direction: column;
+      flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+      width: 100%;
+  }
+  .features .featureImg{
+      width: 100%;
+      text-align: center;
+      margin-bottom: 30px;
+      margin-top: 20px;
+  }
+  .features .featureCont {
+      width: 75%;
+      gap: 15px;
+  }
+  }
+  .exploreCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  
+  }
+  .innerExploreTitle{
+    display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      
+      align-items: baseline;
+  }
+  .exploreCont #planYourTrip{
+  font-size: 1rem;
+  color: #c2ba9e;
+  }
+  .exploreCont h1{
+    font-size: 3rem;
+  }
+  
+  
+  .exploreTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .exploreTitle .viewDestBtn button{
+     background-color: #004d40;
+     color: #ffffff;
+    border-radius: 9999px;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(194 194 194 / var(--tw-border-opacity));
+    padding: .5rem 1.25rem;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 500;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(.4,0,.2,1);
+    transition-duration: .15s;
+  }
+  
+  .book {
+background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("/public/images/pexels-dubai-king-3615161.jpg");
+    
+    background-size: cover;
+    width: 100%;
+    height: 50vh;
+    align-items: center;
+    display: flex;
+  }
+  
+  .book p{
+    font-size: 2rem;
+  
+  }
+  
+  .book button {
+    padding-left: 100px;
+    font-size: 1.1rem;
+    padding-right: 100px;
+  }
+  
+  .btn4 {
+    background-color: #c2ba9e;
+    padding-left: 30px;
+    border: none;
+    height: 35px;
+  }
+  
+  .btn4:hover {
+    background-color: #606060;
+    transition: 0.6s;
+  }
+  
+  
+  .videoSection {
+    position: relative; 
+    width: 100%;
+  }
+  .videoSection video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .videoInfo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); 
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 90%;
+  }
+  .videoInfo p{
+    font-size: 3rem;
+    color: #004d40;
+  }
+  
+  
+  @media screen and (max-width: 560px) {
+    .videoInfo p {
+      font-size: 2rem;
+    }
+  }
+
+  .faq-section {
+    background-color: #f8f9fa;
+  }
+  
+  .faq-section h2 {
+    color: #004d40;
+    font-weight: 600;
+  }
+  
+  .accordion-button {
+    background-color: #e2e2e2;
+    color: #004d40;
+    font-weight: 500;
+  }
+  
+  .accordion-button:not(.collapsed) {
+    background-color: #c2ba9e;
+    color: #000;
+  }
+  
+  .accordion-body {
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  .clientsCont p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    font-style: italic;
+    color: #004d40;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+  }
+  
+  .card-text {
+    margin-top: 5px;
+    font-weight: 600;
+    color: #000;
+  }
+  
+  .carousel-inner {
+    max-width: 900px;
+    margin: auto;
+    padding-bottom: 40px;
+  }
+  
+  .carousel-item {
+    transition: transform 0.6s ease-in-out;
+  }
+  
+  .carousel-item img {
+    object-fit: cover;
+    border: 2px solid #004d40;
+    padding: 3px;
+  }
+  
+
+  footer input {
+    border: solid #606060;
+    background-color: #fff;
+    color: #000;
+  }
+
+  .fa {
+    width: 7px;
+    background-color: #000000;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+  
+  }
+  .btn1 {
+    background-color: #303133;
+    border: none;
+    height: 35px;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    padding: 25px 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  
+  }
+  .btn1:hover {
+    background-color: #606060;
+    transition: 0.6s;
+  }
+  .social-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  
+  
+  @media (min-width: 430px) and (max-width: 620px) {
+    footer div {
+        padding-bottom: 20px;
+    }
+  }
+  
+  @media (min-width: 998px) and (max-width: 1195px) {
+    .input-footer {
+        padding-left: 10px;
+    }
+  }
