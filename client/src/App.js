@@ -21,7 +21,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 function App() {
   const [scrolled, setScrolled] = useState(false);
-
+  const [user, setUser] = useState(null); 
   // Initialize AOS (Animate On Scroll)
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -36,6 +36,13 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+// Load user from localStorage
+useEffect(() => {
+  const storedUser = localStorage.getItem('user');
+  if (storedUser) {
+    setUser(JSON.parse(storedUser));
+  }
+}, []);
 
   return (
     <>
@@ -67,11 +74,15 @@ function App() {
               <li className="nav-item"><a className="nav-link text-white" href="#about">About Us</a></li>
               <li className="nav-item"><a className="nav-link text-white" href="#"><i className="bi bi-cart"></i> Cart</a></li>
               <li className="nav-item">
-                  {/* Use Link instead of anchor tag */}
-                  <Link to="/signin" className="nav-link text-white">
-                    <i className="bi"></i> Register/SignIn
-                  </Link>
-                </li>
+  {user ? (
+    <span className="nav-link text-white">Welcome, {user.fullName}</span>
+  ) : (
+    <Link to="/signin" className="nav-link text-white">
+      <i className="bi"></i> Register/SignIn
+    </Link>
+  )}
+</li>
+
               </ul>
             </div>
           </div>

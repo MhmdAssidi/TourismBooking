@@ -28,7 +28,8 @@ const Signup = () => {
       const data = await response.json();
   
       if (response.ok) {
-        alert('User registered successfully!');
+        localStorage.setItem('user', JSON.stringify({ fullName: formData.fullName }));
+        window.location.href = '/';  // Redirect to home page
       
       } else {
         alert(data.message || 'Something went wrong');

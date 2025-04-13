@@ -17,35 +17,39 @@ mongoose.connect(process.env.MONGO_URI)
 
   app.post('/api/signup', async (req, res) => {
     try {
-      console.log('Request body:', req.body);
-  
       const { fullName, contact, password } = req.body;
   
+      // Validate input
       if (!fullName || !contact || !password) {
         return res.status(400).json({ message: 'All fields are required' });
       }
   
-      // Optional: console log to make sure password and contact are coming through
-      console.log(' Saving user:', fullName, contact);
+      // Check if user already exists
+      const existingUser = await User.findOne({ fullName, contact });
+      if (existingUser) {
+        return res.status(409).json({ message: 'User already exists with this name and contact' });
+      }
   
-      const userId = await getNextUserId(); // this should return a number
+      // Generate user ID and hash password
+      const userId = await getNextUserId();
       const hashedPassword = await bcrypt.hash(password, 10);
-
+  
       const newUser = new User({
         userId,
         fullName,
         contact,
-        password:hashedPassword
+        password: hashedPassword
       });
   
       await newUser.save();
-      console.log(' User saved to DB');
-      res.status(201).json({ message: 'User registered successfully!' });
+      res.status(201).json({ message: 'User registered successfully' });
+  
     } catch (err) {
-      console.error('❌ Backend error:', err);
-      res.status(500).json({ message: 'Something went wrong' });
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
     }
   });
+  
   
   app.listen(5000, () => {
     console.log('Server is running on http://localhost:5000');
