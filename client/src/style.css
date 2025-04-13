@@ -33,10 +33,11 @@
       opacity: 0.8;
   
     }
-  .carousel-item img {
-      object-fit: cover; 
-      width: 20%;
-  }
+    .carousel-item img {
+      object-fit: cover;
+      width: 100%;
+      height: 100vh; /* fullscreen height on mobile */
+    }
   
   .carousel-caption {
       position: absolute;
@@ -444,12 +445,6 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
     color: #000;
   }
   
-  .carousel-inner {
-    max-width: 900px;
-    margin: auto;
-    padding-bottom: 40px;
-  }
-  
   .carousel-item {
     transition: transform 0.6s ease-in-out;
   }
@@ -512,3 +507,12 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
         padding-left: 10px;
     }
   }
+
+  .card-body .testimonial-img {
+  width: 20%;
+  height: auto;
+  border: 2px solid #004d40;
+  padding: 5px;
+}
+
+  

@@ -18,7 +18,8 @@ function Testimonials() {
             </div>
             <div className="col-md-12">
               <div className="card-body">
-                <img src="/images/team-1.png" className="rounded-circle" alt="client1"/>
+              <img src="/images/team-1.png" className="rounded-circle testimonial-img" alt="client1" />
+
                 <div className="d-block">
                   <div className="card-text">Brian Clark</div>
                 </div>
@@ -35,8 +36,8 @@ function Testimonials() {
             </div>
             <div className="col-md-12">
               <div className="card-body">
-                <img src="/images/team-2.png" className="rounded-circle" alt="client2"/>
-                <div className="d-block">
+              <img src="/images/team-2.png" className="rounded-circle testimonial-img" alt="client2"/>
+              <div className="d-block">
                   <div className="card-text">Kevin Clark</div>
                 </div>
               </div>
@@ -51,7 +52,8 @@ function Testimonials() {
             </div>
             <div className="col-md-12">
               <div className="card-body">
-                <img src="/images/team-3.png" className="rounded-circle" alt="client3"/>
+              <img src="/images/team-3.png" className="rounded-circle testimonial-img" alt="client3"/>
+
                 <div className="d-block">
                   <div className="card-text">David Clark</div>
                 </div>
