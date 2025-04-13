@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI)
 
   app.post('/api/signup', async (req, res) => {
     try {
-      const { fullName, contact, password } = req.body;
+      const { fullName, contact, password } = req.body;   //retreive inputs from req.body
   
       // Validate input
       if (!fullName || !contact || !password) {
@@ -34,6 +34,7 @@ mongoose.connect(process.env.MONGO_URI)
       const userId = await getNextUserId();
       const hashedPassword = await bcrypt.hash(password, 10);
   
+      //create the new user
       const newUser = new User({
         userId,
         fullName,
@@ -41,7 +42,7 @@ mongoose.connect(process.env.MONGO_URI)
         password: hashedPassword
       });
   
-      await newUser.save();
+      await newUser.save();  //save it in the backend
       res.status(201).json({ message: 'User registered successfully' });
   
     } catch (err) {

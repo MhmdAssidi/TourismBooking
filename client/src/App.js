@@ -75,7 +75,7 @@ useEffect(() => {
               <li className="nav-item"><a className="nav-link text-white" href="#"><i className="bi bi-cart"></i> Cart</a></li>
               <li className="nav-item">
   {user ? (
-    <span className="nav-link text-white">Welcome, {user.fullName}</span>
+    <span className="nav-link text-white fs-3">Welcome, {user.fullName}</span>
   ) : (
     <Link to="/signin" className="nav-link text-white">
       <i className="bi"></i> Register/SignIn

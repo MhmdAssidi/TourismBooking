@@ -25,14 +25,14 @@ const Signup = () => {
         body: JSON.stringify(formData),
       });
   
-      const data = await response.json();
-  
+      // below runs after the backend successfully saves the user in MongoDB and sends a positive response (status: 201 OK):
+
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify({ fullName: formData.fullName }));
         window.location.href = '/';  // Redirect to home page
       
       } else {
-        alert(data.message || 'Something went wrong');
+        alert('Something went wrong');
       }
   
     } catch (error) {
