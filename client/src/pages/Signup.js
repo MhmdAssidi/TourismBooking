@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
-import './SignUp.css'; // create this file for custom styling
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'; 
+import './SignUp.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+function Signup({ user, setUser }) {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   const [formData, setFormData] = useState({
     fullName: '',
     contact: '',
@@ -15,32 +23,27 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('http://localhost:5000/api/signup', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-  
-      // below runs after the backend successfully saves the user in MongoDB and sends a positive response (status: 201 OK):
 
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify({ fullName: formData.fullName }));
-        window.location.href = '/';  // Redirect to home page
-      
+        setUser({ fullName: formData.fullName }); // ✅ update App state
+        navigate('/'); // cleaner than window.location.href
       } else {
         alert('Something went wrong');
       }
-  
+
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('An error occurred. Please try again.');
     }
   };
-  
 
   return (
     <div className="signup-container">
@@ -82,6 +85,6 @@ const Signup = () => {
       </form>
     </div>
   );
-};
+}
 
 export default Signup;

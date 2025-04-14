@@ -43,7 +43,10 @@ useEffect(() => {
     setUser(JSON.parse(storedUser));
   }
 }, []);
-
+const handleLogout = () => {
+  localStorage.removeItem('user');
+  setUser(null);
+};
   return (
     <>
       {/* Navbar */}
@@ -74,13 +77,24 @@ useEffect(() => {
               <li className="nav-item"><a className="nav-link text-white" href="#about">About Us</a></li>
               <li className="nav-item"><a className="nav-link text-white" href="#"><i className="bi bi-cart"></i> Cart</a></li>
               <li className="nav-item">
-  {user ? (
-    <span className="nav-link text-white fs-3">Welcome, {user.fullName}</span>
-  ) : (
-    <Link to="/signin" className="nav-link text-white">
-      <i className="bi"></i> Register/SignIn
-    </Link>
-  )}
+              
+              {user ? (
+  <>
+    <span className="nav-link text-white">Welcome, {user.fullName}</span>
+    <button
+      onClick={handleLogout}
+      className="btn btn-sm btn-outline-light ms-2"
+    >
+      Logout
+    </button>
+  </>
+) : (
+  <Link to="/signin" className="nav-link text-white">
+    <i className="bi"></i> Register/SignIn
+  </Link>
+)}
+
+
 </li>
 
               </ul>
@@ -106,8 +120,9 @@ useEffect(() => {
           }
         />
         {/* Signin and Signup are each just React components that act as pages. */}
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signin" element={<Signin user={user} setUser={setUser} />} />
+        <Route path="/signup" element={<Signup user={user} setUser={setUser} />} />
+
       </Routes>
     </>
   );

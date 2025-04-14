@@ -51,7 +51,30 @@ mongoose.connect(process.env.MONGO_URI)
     }
   });
   
-  
+  //  Signin route
+app.post('/api/signin', async (req, res) => {
+  const { contact, password } = req.body;
+
+  try {
+    const user = await User.findOne({ contact });  //email or phone
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid password' });
+    }
+
+    res.status(200).json({ message: 'Login successful', user: { fullName: user.fullName } });
+  } catch (err) {
+    console.error('Signin error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
   app.listen(5000, () => {
     console.log('Server is running on http://localhost:5000');
   });
