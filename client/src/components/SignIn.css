@@ -1,10 +1,9 @@
-/* SignIn.css */
 
 .signin-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 120vh;
     background: linear-gradient(to right, #004d40, #00796b);
     padding: 20px;
   }

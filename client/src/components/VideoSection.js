@@ -2,7 +2,7 @@ import React from 'react';
 
 function VideoSection() {
   return (
-    <section>
+    <section className="sectionVideo">
       <div className="videoSection">
         <video src="/images/WhatsApp Video 2025-03-03 at 12.59.58 AM.mp4" autoPlay loop muted />
         <div className="videoInfo">

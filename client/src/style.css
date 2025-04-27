@@ -9,24 +9,57 @@
       overflow-x: hidden;
   
   }
-    .navbar{
-      width: 100vw;
-      position: fixed;
-      z-index: 2;
-      background-color: #004d40;
-      
-    }
-    .navbar-brand{
-      font-weight: 700;
-      color: #ffffff;
-      font-size: 2rem;
-    }
-    .nav-item a{
-      color: #ffffff;
+  .navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
   
-      font-size: 1.3rem;
-      opacity: 0.9;
-    }
+  .custom-navbar {
+    background-color: transparent;
+  }
+  
+  .navbar-scrolled {
+    background-color: #004d40;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .nav-link {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.9;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #ffc107;
+    opacity: 1;
+  }
+  
+  .btn-outline-light {
+    font-weight: 500;
+    padding: 6px 18px;
+    border-radius: 50px; 
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-outline-light:hover {
+    background-color: #ffffff;
+    color: #004d40;
+  }
+  
     .carousel-caption{
       background-color: #ffff;
       border-radius: 3%;
@@ -367,26 +400,34 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
     transition: 0.6s;
   }
   
-  
+  .sectionVideo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .videoSection {
-    position: relative; 
-    width: 100%;
+    display: flex;
+        width: 50%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
   }
   .videoSection video {
-    width: 100%;
-    height: auto;
-    display: block;
+    width: 70%;
+   
   }
   .videoInfo {
-    position: absolute;
+    box-sizing: border-box;
+    /* position: absolute; */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
     text-align: center;
-    background: rgba(0, 0, 0, 0.5); 
-    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 37px 10px;
     border-radius: 5px;
-    width: 90%;
+    width: 100%;
+    
+    
   }
   .videoInfo p{
     font-size: 3rem;
@@ -395,6 +436,13 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
   
   
   @media screen and (max-width: 560px) {
+    .videoSection {
+      width: 100%;
+    }
+    .videoSection video {
+      width: 100%;
+     
+    }
     .videoInfo p {
       font-size: 2rem;
     }

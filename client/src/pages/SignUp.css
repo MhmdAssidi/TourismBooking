@@ -1,6 +1,6 @@
 .signup-container {
-  background-color: #f8f9fa; /* You can use a solid color instead if you like */
-  min-height: 100vh;
+  background-color: #f8f9fa; 
+  min-height: 120vh;
   display: flex;
   align-items: center;
   justify-content: center;

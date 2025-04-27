@@ -5,15 +5,65 @@ const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 const getNextUserId = require('./utils/NextUserId');
-
+const Trip = require('./models/Trip');
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const insertDummyTrips = async () => {
+  const existing = await Trip.find();
+  if (existing.length === 0) {
+    await Trip.insertMany([
+      {
+        destination: 'Baalbek',
+        description: 'Explore ancient Roman ruins in Baalbek.',
+        date: '2025-04-22',
+        time: '09:00'
+      },
+      {
+        destination: 'Zahle',
+        description: 'Relax by the Litani River with delicious cuisine.',
+        date: '2025-04-23',
+        time: '14:00'
+      },
+      {
+        destination: 'Qaraoun Lake',
+        description: 'Enjoy a peaceful boat ride on the lake.',
+        date: '2025-04-22',
+        time: '10:30'
+      },
+      {
+        destination: 'Anjar',
+        description: 'Visit the famous Umayyad ruins in the scenic town of Anjar.',
+        date: '2025-04-24',
+        time: '11:00'
+      },
+      {
+        destination: 'Chtaura',
+        description: 'Savor fresh dairy products and shop local goods in Chtaura.',
+        date: '2025-04-25',
+        time: '13:00'
+      },
+      {
+        destination: 'Deir el Ahmar',
+        description: 'Discover vineyards and historic churches in Deir el Ahmar.',
+        date: '2025-04-26',
+        time: '08:30'
+      }
+    ]);
+    console.log(' 6 Sample trips inserted');
+  }
+};
+
+
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('MongoDB connected'))
+  .then(() => {
+    console.log('MongoDB connected');
+    insertDummyTrips(); // insert trips only if not already present
+  })
   .catch(err => console.error('MongoDB connection error:', err));
+
 
   app.post('/api/signup', async (req, res) => {
     try {
@@ -72,6 +122,16 @@ app.post('/api/signin', async (req, res) => {
   } catch (err) {
     console.error('Signin error:', err);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+app.get('/api/trips', async (req, res) => {
+  try {
+    const trips = await Trip.find();
+    res.status(200).json(trips);
+  } catch (err) {
+    console.error('Error fetching trips:', err);
+    res.status(500).json({ message: 'Failed to retrieve trips' });
   }
 });
 

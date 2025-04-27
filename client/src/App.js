@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'; 
 import './style.css';
 import { Routes, Route, Link } from 'react-router-dom';
-
+import BookTrip from './pages/BookTrip';
 //for animations:
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -50,57 +50,61 @@ const handleLogout = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className={`navbar navbar-expand-lg fixed-top px-5 ${scrolled ? 'navbar-scrolled custom-navbar' : 'custom-navbar'}`}>
-        <div className="container">
-          <a className="navbar-brand text-white" href="#">Beqaa Tours</a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+      <nav className={`navbar navbar-expand-lg fixed-top ${scrolled ? 'navbar-scrolled' : 'custom-navbar'}`}>
+  <div className="container-fluid px-4">
+    {/* Left side: Logo */}
+    <Link className="navbar-brand" to="/">Beqaa Tours</Link>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-             <Link to="/" className="nav-link text-white">
-                   Home
-               </Link>
-          </li>
-
-              <li className="nav-item"><a className="nav-link text-white" href="#">Book a trip</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="#about">About Us</a></li>
-              <li className="nav-item"><a className="nav-link text-white" href="#"><i className="bi bi-cart"></i> Cart</a></li>
-              <li className="nav-item">
-              
-              {user ? (
-  <>
-    <span className="nav-link text-white">Welcome, {user.fullName}</span>
     <button
-      onClick={handleLogout}
-      className="btn btn-sm btn-outline-light ms-2"
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
-      Logout
+      <span className="navbar-toggler-icon"></span>
     </button>
-  </>
-) : (
-  <Link to="/signin" className="nav-link text-white">
-    <i className="bi"></i> Register/SignIn
-  </Link>
-)}
 
+    <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+      {/* Center: Links */}
+      <ul className="navbar-nav">
+        <li className="nav-item mx-2">
+          <Link to="/" className="nav-link">Home</Link>
+        </li>
+        <li className="nav-item mx-2">
+          <Link to="/book" className="nav-link">Book a Trip</Link>
+        </li>
+        <li className="nav-item mx-2">
+          <a href="#about" className="nav-link">About Us</a>
+        </li>
+        <li className="nav-item mx-2">
+          <a href="#" className="nav-link"><i className="bi bi-cart"></i> Cart</a>
+        </li>
+      </ul>
+    </div>
 
-</li>
-
-              </ul>
-            </div>
-          </div>
-        </nav>
+   
+    <div className="d-flex align-items-center">
+      {user ? (
+        <>
+          <span className="nav-link text-white me-2">Welcome, {user.fullName}</span>
+          <button
+            onClick={handleLogout}
+            className="btn btn-outline-light rounded-pill"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <Link to="/signin" className="btn btn-outline-light rounded-pill">
+          Register / SignIn
+        </Link>
+      )}
+    </div>
+  </div>
+</nav>
 
       {/* Pages Routing */}
       <Routes>
@@ -122,7 +126,7 @@ const handleLogout = () => {
         {/* Signin and Signup are each just React components that act as pages. */}
         <Route path="/signin" element={<Signin user={user} setUser={setUser} />} />
         <Route path="/signup" element={<Signup user={user} setUser={setUser} />} />
-
+        <Route path="/book" element={<BookTrip />} />
       </Routes>
     </>
   );

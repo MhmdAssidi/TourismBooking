@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'; //useNavigate: to redirect
 function Signin({ user,setUser }) {
 
   //Redirect if already logged in
+  
+  const navigate = useNavigate();
   useEffect(() => {
     if (user) {
       navigate('/');
@@ -18,7 +20,6 @@ function Signin({ user,setUser }) {
     password: '',
   });
 
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
