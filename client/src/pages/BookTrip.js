@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './BookTrip.css'; // Custom styles for trip cards
+import Footer from '../components/Footer';
+import { useNavigate } from 'react-router-dom';  
 
-function BookTrip() {
+function BookTrip({ user }) {   // <--- receive user here
+  const navigate = useNavigate();  // <--- for redirection
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/signin');
+    }
+  }, [user, navigate]);
+
   const [trips, setTrips] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterDate, setFilterDate] = useState('');
@@ -35,35 +45,33 @@ function BookTrip() {
       <h2 className="mb-4 text-center">Book a Trip</h2>
 
       {/* Search and Filters */}
-      <div className="row mb-4">
-        <div className="col-md-4">
-          <input
-            type="text"
-            placeholder="Search by destination or keyword"
-            className="form-control"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+      <div className="filter-bar p-4 rounded-4 shadow-sm mb-5 d-flex flex-wrap justify-content-center gap-3">
+  <input
+    type="text"
+    placeholder="Search by destination or keyword"
+    className="form-control rounded-pill"
+    style={{ maxWidth: '250px' }}
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
 
-        <div className="col-md-3">
-          <input
-            type="date"
-            className="form-control"
-            value={filterDate}
-            onChange={(e) => setFilterDate(e.target.value)}
-          />
-        </div>
+  <input
+    type="date"
+    className="form-control rounded-pill"
+    style={{ maxWidth: '180px' }}
+    value={filterDate}
+    onChange={(e) => setFilterDate(e.target.value)}
+  />
 
-        <div className="col-md-3">
-          <input
-            type="time"
-            className="form-control"
-            value={filterTime}
-            onChange={(e) => setFilterTime(e.target.value)}
-          />
-        </div>
-      </div>
+  <input
+    type="time"
+    className="form-control rounded-pill"
+    style={{ maxWidth: '180px' }}
+    value={filterTime}
+    onChange={(e) => setFilterTime(e.target.value)}
+  />
+</div>
+
 
       {/* Trip Cards */}
       <div className="row">
@@ -103,7 +111,11 @@ function BookTrip() {
           <p className="text-muted">No trips match your filters.</p>
         )}
       </div>
+<Footer />
+
     </div>
+
+
   );
 }
 

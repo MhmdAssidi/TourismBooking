@@ -126,7 +126,8 @@ const handleLogout = () => {
         {/* Signin and Signup are each just React components that act as pages. */}
         <Route path="/signin" element={<Signin user={user} setUser={setUser} />} />
         <Route path="/signup" element={<Signup user={user} setUser={setUser} />} />
-        <Route path="/book" element={<BookTrip />} />
+        <Route path="/book" element={<BookTrip user={user} />} />
+
       </Routes>
     </>
   );
