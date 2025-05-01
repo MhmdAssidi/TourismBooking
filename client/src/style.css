@@ -407,7 +407,7 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
   }
   .videoSection {
     display: flex;
-        width: 50%;
+        width: 100%;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -435,7 +435,7 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
   }
   
   
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 660px) {
     .videoSection {
       width: 100%;
     }
@@ -508,6 +508,7 @@ background: linear-gradient(rgba(0, 0, 0, 0.719), rgba(19, 19, 21, 0.73)), url("
     border: solid #606060;
     background-color: #fff;
     color: #000;
+    width: 80%;
   }
 
   .fa {

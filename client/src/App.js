@@ -1,4 +1,4 @@
-
+import Cart from './pages/Cart';
 import React, { useEffect, useState } from 'react'; 
 import './style.css';
 import { Routes, Route, Link } from 'react-router-dom';
@@ -27,7 +27,6 @@ function App() {
     AOS.init({ duration: 1000 });
   }, []);
 
-  //  Add scroll listener for navbar animation
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -36,7 +35,7 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-// Load user from localStorage
+
 useEffect(() => {
   const storedUser = localStorage.getItem('user');
   if (storedUser) {
@@ -79,9 +78,11 @@ const handleLogout = () => {
         <li className="nav-item mx-2">
           <a href="#about" className="nav-link">About Us</a>
         </li>
-        <li className="nav-item mx-2">
-          <a href="#" className="nav-link"><i className="bi bi-cart"></i> Cart</a>
-        </li>
+        <li className="nav-item">
+  <Link to="/cart" className="nav-link text-white">
+    <i className="bi bi-cart"></i> Picked Trips
+  </Link>
+</li>
       </ul>
     </div>
 
@@ -89,7 +90,7 @@ const handleLogout = () => {
     <div className="d-flex align-items-center">
       {user ? (
         <>
-          <span className="nav-link text-white me-2">Welcome, {user.fullName}</span>
+          <span className="nav-link text-white me-4">Welcome, {user.fullName}</span>
           <button
             onClick={handleLogout}
             className="btn btn-outline-light rounded-pill"
@@ -127,7 +128,7 @@ const handleLogout = () => {
         <Route path="/signin" element={<Signin user={user} setUser={setUser} />} />
         <Route path="/signup" element={<Signup user={user} setUser={setUser} />} />
         <Route path="/book" element={<BookTrip user={user} />} />
-
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </>
   );

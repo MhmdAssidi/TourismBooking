@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Features = () => {
-  const [visibleSection, setVisibleSection] = useState(null);
+  const [visibleSection, setVisibleSection] = useState("how");
 
   const toggleSection = (section) => {
     setVisibleSection(prev => (prev === section ? null : section));

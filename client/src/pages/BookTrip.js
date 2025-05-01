@@ -1,9 +1,11 @@
+import { useCart } from '../context/cartContext';
 import React, { useEffect, useState } from 'react';
-import './BookTrip.css'; // Custom styles for trip cards
+import './BookTrip.css'; 
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';  
 
 function BookTrip({ user }) {   // <--- receive user here
+  const { addToCart } = useCart();
   const navigate = useNavigate();  // <--- for redirection
 
   useEffect(() => {
@@ -17,7 +19,7 @@ function BookTrip({ user }) {   // <--- receive user here
   const [filterDate, setFilterDate] = useState('');
   const [filterTime, setFilterTime] = useState('');
 
-  const coverImage = '/images/ChatGPT Image Apr 28, 2025, 02_21_25 AM.png'; // Common background image
+  const coverImage = '/images/ChatGPT Image Apr 28, 2025, 02_21_25 AM.png'; 
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -83,7 +85,7 @@ function BookTrip({ user }) {   // <--- receive user here
                 <img 
                   src={coverImage} 
                   alt={trip.destination}
-                  className="trip-image rounded-top-4"
+                  className="trip-card-img trip-image rounded-top-4"
                 />
 
                 {/* Trip Details */}
@@ -100,9 +102,13 @@ function BookTrip({ user }) {   // <--- receive user here
                     <span>Time: {trip.time}</span>
                   </div>
 
-                  <button className="btn btn-primary w-100 mt-auto rounded-pill">
-                    Add to Cart
-                  </button>
+                  <button 
+  className="btn btn-primary w-100 mt-auto rounded-pill"
+  onClick={() => addToCart(trip)}
+>
+  Add to Cart
+</button>
+
                 </div>
               </div>
             </div>

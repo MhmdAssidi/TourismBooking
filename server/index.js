@@ -1,3 +1,4 @@
+const Booking = require('./models/Booking');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -139,3 +140,25 @@ app.get('/api/trips', async (req, res) => {
     console.log('Server is running on http://localhost:5000');
   });
   
+  app.post('/api/bookings', async (req, res) => {
+    try {
+      const { userFullName, contact, trips } = req.body;
+  
+      if (!userFullName || !contact || !trips || trips.length === 0) {
+        return res.status(400).json({ message: 'Missing booking details' });
+      }
+  
+      const newBooking = new Booking({
+        userFullName,
+        contact,
+        trips,
+      });
+  
+      await newBooking.save();
+  
+      res.status(201).json({ message: 'Booking confirmed successfully!' });
+    } catch (error) {
+      console.error('Booking error:', error);
+      res.status(500).json({ message: 'Server error during booking' });
+    }
+  });
