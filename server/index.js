@@ -119,7 +119,14 @@ app.post('/api/signin', async (req, res) => {
       return res.status(400).json({ message: 'Invalid password' });
     }
 
-    res.status(200).json({ message: 'Login successful', user: { fullName: user.fullName } });
+    res.status(200).json({
+      message: 'Login successful',
+      user: {
+        fullName: user.fullName,
+        contact: user.contact 
+      }
+    });
+    
   } catch (err) {
     console.error('Signin error:', err);
     res.status(500).json({ message: 'Server error' });
@@ -162,3 +169,50 @@ app.get('/api/trips', async (req, res) => {
       res.status(500).json({ message: 'Server error during booking' });
     }
   });
+
+  app.post('/api/checkout', async (req, res) => {
+    const { userFullName, contact, trips } = req.body;
+  
+    console.log('Checkout request body:', req.body);
+  
+    if (!userFullName || !contact || !trips || trips.length === 0) {
+      return res.status(400).json({ message: 'Missing booking information' });
+    }
+  
+    try {
+      // Find existing bookings for this user
+      const existingBookings = await Booking.find({ userFullName, contact });
+  
+      // Check if any existing booking has identical trips
+      const isDuplicate = existingBookings.some(booking => {
+        if (booking.trips.length !== trips.length) return false;
+  
+        return booking.trips.every(trip => 
+          trips.some(newTrip =>
+            newTrip.destination === trip.destination &&
+            newTrip.date === trip.date &&
+            newTrip.time === trip.time
+          )
+        );
+      });
+  
+      if (isDuplicate) {
+        return res.status(409).json({ message: 'Duplicate booking already exists.' });
+      }
+  
+      // Save booking
+      const newBooking = new Booking({ userFullName, contact, trips });
+      const saved = await newBooking.save();
+      console.log('Booking saved:', saved);
+      return res.status(201).json({ message: 'Booking saved successfully' });
+    } catch (err) {
+      console.error('Booking save error:', err);
+      return res.status(500).json({ message: 'Failed to save booking' });
+    }
+  });
+  
+  
+  
+  
+  
+  

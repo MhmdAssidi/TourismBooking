@@ -32,10 +32,15 @@ function Signup({ user, setUser }) {
       });
 
       if (response.ok) {
-        localStorage.setItem('user', JSON.stringify({ fullName: formData.fullName }));
-        setUser({ fullName: formData.fullName }); // ✅ update App state
-        navigate('/'); // cleaner than window.location.href
-      } else {
+        const savedUser = {
+          fullName: formData.fullName,
+          contact: formData.contact
+        };
+        localStorage.setItem('user', JSON.stringify(savedUser));
+        setUser(savedUser);
+        navigate('/');
+      }
+       else {
         alert('Something went wrong');
       }
 

@@ -42,10 +42,16 @@ function Signin({ user,setUser }) {
 
 
       if (response.ok) {
-  localStorage.setItem('user', JSON.stringify({ fullName: data.user.fullName }));
-  setUser({ fullName: data.user.fullName }); //  This updates App.js immediately
-  navigate('/'); // Redirect to home
-}
+        const savedUser = {
+          fullName: data.user.fullName,
+          contact: data.user.contact   //  make sure backend includes it
+        };
+        localStorage.setItem('user', JSON.stringify(savedUser));
+        setUser(savedUser);
+        navigate('/');
+      }
+      
+      
 
 
     } catch (error) {

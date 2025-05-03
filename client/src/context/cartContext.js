@@ -12,28 +12,26 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (trip) => {
     setCart(prev => {
-      const exists = prev.some(item => item._id === trip._id);
-      if (exists) {
-        alert("This trip is already in your picked trips.");
-        return prev;
-      }
+      if (prev.some(t => t._id === trip._id)) return prev;
       return [...prev, trip];
     });
   };
-  
-  
-  
 
   const removeFromCart = (tripId) => {
-    setCart(prev => prev.filter(trip => trip._id !== tripId));
+    setCart(prev => prev.filter(t => t._id !== tripId));
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
       {children}
     </CartContext.Provider>
   );
 };
+
 
 export const useCart = () => useContext(CartContext);
 

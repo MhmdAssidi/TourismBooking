@@ -7,6 +7,8 @@ import BookTrip from './pages/BookTrip';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import { useNavigate } from 'react-router-dom';
+
 // Import components
 import Carousel from './components/Carousel';
 import Features from './components/Features';
@@ -42,11 +44,18 @@ useEffect(() => {
     setUser(JSON.parse(storedUser));
   }
 }, []);
+const navigate = useNavigate();
+
 const handleLogout = () => {
   localStorage.removeItem('user');
   setUser(null);
+  navigate('/');           //  Redirect to home page
+  window.location.reload(); // Optional: force refresh
 };
+
+
   return (
+    
     <>
       {/* Navbar */}
       <nav className={`navbar navbar-expand-lg fixed-top ${scrolled ? 'navbar-scrolled' : 'custom-navbar'}`}>
