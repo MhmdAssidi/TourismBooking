@@ -23,32 +23,45 @@ function Signup({ user, setUser }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    const { fullName, contact, password } = formData;
+  
+    // Check if contact is valid (either 8-digit phone or valid email)
+    const isEmail = contact.includes('@') && contact.includes('.');
+    const isPhone = /^\d{8}$/.test(contact);
+  
+    if (!isEmail && !isPhone) {
+      alert('Contact must be a valid Gmail or an 8-digit phone number.');
+      return;
+    }
+  // Validate password strength
+  const strongPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  if (!strongPassword.test(password)) {
+    alert('Password must be at least 8 characters and include at least one letter and one number.');
+    return;
+  }
     try {
       const response = await fetch('http://localhost:5000/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ fullName, contact, password }),
       });
-
+  
       if (response.ok) {
-        const savedUser = {
-          fullName: formData.fullName,
-          contact: formData.contact
-        };
+        const savedUser = { fullName, contact };
         localStorage.setItem('user', JSON.stringify(savedUser));
         setUser(savedUser);
         navigate('/');
+      } else {
+        const error = await response.json();
+        alert(error.message || 'Something went wrong');
       }
-       else {
-        alert('Something went wrong');
-      }
-
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('An error occurred. Please try again.');
     }
   };
+  
 
   return (
     <div className="signup-container">
