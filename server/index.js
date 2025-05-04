@@ -1,16 +1,24 @@
+
+
 const Booking = require('./models/Booking');
 const express = require('express');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+require('dotenv').config();
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY); 
+const model = genAI.getGenerativeModel({ model: 'models/gemini-1.5-flash' }); 
+
 const mongoose = require('mongoose');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const User = require('./models/User');
 const getNextUserId = require('./utils/NextUserId');
 const Trip = require('./models/Trip');
-dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+console.log(process.env.GEMINI_API_KEY);
 
 const insertDummyTrips = async () => {
   const existing = await Trip.find();
@@ -53,7 +61,7 @@ const insertDummyTrips = async () => {
         time: '08:30'
       }
     ]);
-    console.log(' 6 Sample trips inserted');
+    
   }
 };
 
@@ -181,7 +189,6 @@ app.get('/api/trips', async (req, res) => {
   app.post('/api/checkout', async (req, res) => {
     const { userFullName, contact, trips } = req.body;
   
-    console.log('Checkout request body:', req.body);
   
     if (!userFullName || !contact || !trips || trips.length === 0) {
       return res.status(400).json({ message: 'Missing booking information' });
@@ -218,6 +225,33 @@ app.get('/api/trips', async (req, res) => {
       return res.status(500).json({ message: 'Failed to save booking' });
     }
   });
+  
+  
+  app.post('/api/suggestions', async (req, res) => {
+    const { destination, date, time } = req.body;
+    console.log('Received suggestion request for:', destination, date, time);
+  
+    try {
+      const model = genAI.getGenerativeModel({ model: 'models/gemini-1.5-flash' }); 
+  
+      const result = await model.generateContent([
+        `I'm going on a trip to ${destination} on ${date} at ${time}. What are 5 essential things I should take with me? Just list them clearly.`
+      ]);
+  
+      const text = result.response.text();
+  
+      const items = text
+        .split('\n')
+        .map(line => line.replace(/^\d+\.?\s*/, '').trim())
+        .filter(Boolean);
+  
+      res.json({ items });
+    } catch (error) {
+      console.error('Gemini API error:', error.message);
+      res.status(500).json({ message: 'Failed to fetch AI suggestions' });
+    }
+  });
+  
   
   
   

@@ -5,7 +5,8 @@ import { useCart } from '../context/cartContext'; // import context
 function Cart() {
   const { cart, removeFromCart, clearCart } = useCart();
   const [showConfirmation, setShowConfirmation] = useState(false);
-
+  const [suggestions, setSuggestions] = useState([]);
+  
   const handleCheckout = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) return alert('You must be logged in');
@@ -35,22 +36,47 @@ function Cart() {
   
       clearCart();
       setShowConfirmation(true);
-  
+  // Get AI suggestions
+try {
+  const suggestionRes = await fetch('http://localhost:5000/api/suggestions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      destination: cart[0]?.destination,
+      date: cart[0]?.date,
+      time: cart[0]?.time
+    })
+  });
+
+  const suggestionData = await suggestionRes.json();
+  setSuggestions(suggestionData.items || []);
+} catch (err) {
+  console.error('Suggestion fetch error:', err);
+}
     } catch (err) {
       console.error('Checkout error:', err);
       alert('An error occurred');
     }
   };
   
-
-  
-  
-  
   
   return (
     <div className="container mt-5 pt-5">
      {showConfirmation ? (
-  <h1 className="text-center text-success fw-bold mt-5">See you on board!</h1>
+  <div className="text-center mt-5">
+    <h1 className="text-success fw-bold">See you on board!</h1>
+
+    {suggestions.length > 0 && (
+      <div className="mt-4">
+        <h5 className="fw-bold">Things to take with you:</h5>
+        <ul className="list-unstyled">
+          {suggestions.map((item, i) => (
+            <li key={i}>✔️ {item}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
 ) : (
   <>
     <h2 className="mb-4 text-center">Your Picked Trips</h2>
