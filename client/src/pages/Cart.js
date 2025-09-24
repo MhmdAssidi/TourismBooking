@@ -37,6 +37,7 @@ function Cart() {
       clearCart();
       setShowConfirmation(true);
   // Get AI suggestions
+
 try {
   const suggestionRes = await fetch('http://localhost:5000/api/suggestions', {
     method: 'POST',
@@ -48,8 +49,8 @@ try {
     })
   });
 
-  const suggestionData = await suggestionRes.json();
-  setSuggestions(suggestionData.items || []);
+  const suggestionData = await suggestionRes.json(); //waiting for the AI’s list 
+  setSuggestions(suggestionData.items || []);  //saves the suggestion from AI into a state variable called suggestions.
 } catch (err) {
   console.error('Suggestion fetch error:', err);
 }
@@ -70,7 +71,8 @@ try {
       <div className="mt-4">
         <h5 className="fw-bold">Things to take with you:</h5>
         <ul className="list-unstyled">
-          {suggestions.map((item, i) => (
+          {suggestions.map((item, i) => (  //array.map(function(currentValue, index, arr), thisValue)
+          //index is optional while currentValue is required and function() is required
             <li key={i}>✔️ {item}</li>
           ))}
         </ul>

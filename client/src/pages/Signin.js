@@ -31,7 +31,6 @@ function Signin({ user,setUser }) {
 
     try {
 
-      //Send a POST request to your backend:
       const response = await fetch('http://localhost:5000/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

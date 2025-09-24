@@ -12,8 +12,8 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (trip) => {
     setCart(prev => {
-      if (prev.some(t => t._id === trip._id)) return prev;
-      return [...prev, trip];
+      if (prev.some(t => t._id === trip._id)) return prev; // line checks if the trip already exists in the cart.
+      return [...prev, trip]; //If the trip is not already in the cart, it creates a new array with all the previous trips plus the new trip.
     });
   };
 

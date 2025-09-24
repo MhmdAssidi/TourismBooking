@@ -23,9 +23,16 @@ function Footer() {
           </div>
 
           <div className="social-icons col-lg-3">
-            <a href="#"><img src="/images/icon-facebook.svg" alt="Facebook" /></a>
-            <a href="#"><img width="25" height="25" src="/images/logo-black.png" alt="X" /></a>
-            <a href="#"><img src="/images/icon-instagram.svg" alt="Instagram" /></a>
+            <a href="#facebook">
+  <img src="/images/icon-facebook.svg" alt="Facebook" />
+</a>
+<a href="#x">
+  <img width="25" height="25" src="/images/logo-black.png" alt="X" />
+</a>
+<a href="#instagram">
+  <img src="/images/icon-instagram.svg" alt="Instagram" />
+</a>
+
           </div>
         </div>
       </div>
